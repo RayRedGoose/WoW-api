@@ -31,6 +31,20 @@ exports.up = function(knex) {
         .references('classes.id');
       table.timestamps(true, true);
     })
+    .createTable('characters', function (table) {
+      table.increments('id').primary();
+      table.string('name');
+      table.integer('race_id').unsigned()
+      table.foreign('race_id')
+        .references('races.id');
+      table.integer('class_id').unsigned()
+      table.foreign('class_id')
+        .references('classes.id');
+      table.integer('weapon_id').unsigned()
+      table.foreign('weapon_id')
+        .references('weapons.id');
+      table.timestamps(true, true);
+    })
 };
 
 exports.down = function(knex) {
@@ -38,4 +52,5 @@ exports.down = function(knex) {
     .dropTable('races')
     .dropTable('classes')
     .dropTable('weapons')
+    .dropTable('characters')
 };

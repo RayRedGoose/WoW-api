@@ -15,9 +15,16 @@ exports.up = function(knex) {
       table.string('classes');
       table.timestamps(true, true);
     })
+    .createTable('classes', function (table) {
+      table.increments('id').primary();
+      table.string('name');
+      table.string('symbol');
+      table.timestamps(true, true);
+    })
 };
 
 exports.down = function(knex) {
   return knex.schema
     .dropTable('races')
+    .dropTable('classes')
 };

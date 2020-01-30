@@ -34,6 +34,8 @@ This app is the back-end server for the Mod 4 FE first solo project.
 | `http://localhost:3001/api/v1/characters` | GET | not needed | Array of all existing characters: `[{ id: 1890, name: "Raderstan", race: 101, className: 18, weapon: 907 }]` |
 | `http://localhost:3001/api/v1/characters/:id` | GET | not needed | Single character object with matching id: `{ id: 1890, name: "Raderstan", race: 101, className: 18, weapon: 907 }` |
 
+
+
 **POST requests**
 
 | url | verb | options | sample response |
@@ -41,7 +43,11 @@ This app is the back-end server for the Mod 4 FE first solo project.
 | `http://localhost:3001/api/v1/races` | POST | `{name: <String>, faction: <String>, race_symbol: <String>, race_image: <String>, description: <String>, history: <String>, starting_zone: <String>, home_city: <String>, leader: <String>, mount: <String>, classes: <String> }` | New race: `{ id: 122, name: "Vulpera", race_symbol: "vulpera-symbol-image.jpg", faction: "horde", race_image: "vulpera.jpg", description: "Clever and resourceful, the vulpera have survived amidst the harsh desert of Vol'dun for...", history: "The vulpera have lived in Vol'dun as free traders and merchants for countless generations. For much of that time,...", starting_zone: "Vol'dun", home_city: "Vulpera Hideaway", leader: "Kiro", mount: "Caravan Hyena", classes: "[12, 16]"}` |
 | `http://localhost:3001/api/v1/characters` | POST | `{name: <String>, race_id: <Number>, class_id: <Number>, weapon_id: <Number>}` | New character: `{ id: 1895, name: "Grom", race: 122, className: 18, weapon: 907 }` |
 
+**DELETE requests**
 
-<!-- | `http://localhost:3001/api/v1/reservations/:id` | DELETE | not needed | Array of all remaining reservations: `[{ id: 18907224, name: 'Christie', date: '8/8', time: '7:00', number: 3 }]` | -->
+| url | verb | options | sample response |
+| ----|------|---------|---------------- |
+| `http://localhost:3001/api/v1/races/:id` | DELETE | not needed | Array of all remaining races: `[{ id: 122, name: "Vulpera", race_symbol: "vulpera-symbol-image.jpg", faction: "horde", race_image: "vulpera.jpg", description: "Clever and resourceful, the vulpera have survived amidst the harsh desert of Vol'dun for...", history: "The vulpera have lived in Vol'dun as free traders and merchants for countless generations. For much of that time,...", starting_zone: "Vol'dun", home_city: "Vulpera Hideaway", leader: "Kiro", mount: "Caravan Hyena", classes: "[12, 16]"}]` |
+| `http://localhost:3001/api/v1/characters/:id` | DELETE | not needed | Array of all remaining characters: `[{ id: 1890, name: "Raderstan", race: 101, className: 18, weapon: 907 }]` |
 
 Note: All of these endpoints will return semantic errors if something is wrong with the request.

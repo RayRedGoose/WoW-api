@@ -21,10 +21,21 @@ exports.up = function(knex) {
       table.string('symbol');
       table.timestamps(true, true);
     })
+    .createTable('weapons', function (table) {
+      table.increments('id').primary();
+      table.string('name');
+      table.string('type');
+      table.integer('damage');
+      table.integer('class_id').unsigned()
+      table.foreign('class_id')
+        .references('classes.id');
+      table.timestamps(true, true);
+    })
 };
 
 exports.down = function(knex) {
   return knex.schema
     .dropTable('races')
     .dropTable('classes')
+    .dropTable('weapons')
 };

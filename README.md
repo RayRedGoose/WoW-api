@@ -51,3 +51,14 @@ This app is the back-end server for the Mod 4 FE first solo project.
 | `http://localhost:3001/api/v1/characters/:id` | DELETE | not needed | Array of all remaining characters: `[{ id: 1890, name: "Raderstan", race: 101, className: 18, weapon: 907 }]` |
 
 Note: All of these endpoints will return semantic errors if something is wrong with the request.
+
+### Status Codes & Error Handling
+
+- `200`: GET request success
+- `201`: POST request success
+- `202`: DELETE request success
+
+- `404`: Not Found
+- `422`: Unprocessable Entity
+
+- `500`: Internal Server Error

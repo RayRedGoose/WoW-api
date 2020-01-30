@@ -1,7 +1,7 @@
 module.exports = {
   development: {
     client: 'pg',
-    connection: 'postgres://localhost/wow_project',
+    connection: 'postgres://localhost/wow_api',
     migrations: {
       directory: './db/migrations'
     },

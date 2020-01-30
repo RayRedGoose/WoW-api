@@ -1,4 +1,4 @@
-# Turing Cafe API
+# World of Warcraft API
 
 This app is the back-end server for the Mod 4 FE first solo project.
 

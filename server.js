@@ -15,6 +15,15 @@ app.use(cors());
 
 app.set('port', process.env.PORT || 3001);
 
+app.get('/api/v1/races', async (request, response) => {
+  try {
+    const races = await database('races').select();
+    response.status(200).json(races);
+  }
+  catch(error) {
+    response.status(500).json({ error });
+  }
+});
 app.listen(app.get('port'), () => {
   console.log(`Server is running on http://localhost:${app.get('port')}.`);
 });

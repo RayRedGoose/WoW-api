@@ -217,6 +217,16 @@ app.post('/api/v1/races', async (request, response) => {
   }
 });
 
+app.delete('/api/v1/characters/:id', async (request, response) => {
+  try {
+    await database('characters').where('id', request.params.id).del();
+    const characters = await database('characters').select();
+    response.status(202).json({ characters });
+  } catch (error) {
+    response.status(500).json({ error });
+  }
+});
+
 app.listen(app.get('port'), () => {
   console.log(`Server is running on http://localhost:${app.get('port')}.`);
 });

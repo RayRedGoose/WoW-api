@@ -175,7 +175,7 @@ app.post('/api/v1/characters', async (request, response) => {
 
   try {
     const id = await database('characters').insert(character, 'id');
-    response.status(201).json({ character })
+    response.status(201).json(character)
   } catch (error) {
     response.status(500).json({ error });
   }
@@ -206,7 +206,7 @@ app.post('/api/v1/races', async (request, response) => {
 
   try {
     const id = await database('races').insert(race, 'id');
-    response.status(201).json({ race })
+    response.status(201).json(race)
   } catch (error) {
     response.status(500).json({ error });
   }
@@ -216,7 +216,7 @@ app.delete('/api/v1/characters/:id', async (request, response) => {
   try {
     await database('characters').where('id', request.params.id).del();
     const characters = await database('characters').select();
-    response.status(202).json({ characters });
+    response.status(202).json(characters);
   } catch (error) {
     response.status(500).json({ error });
   }
@@ -226,7 +226,7 @@ app.delete('/api/v1/races/:id', async (request, response) => {
   try {
     await database('races').where('id', request.params.id).del();
     const races = await database('races').select();
-    response.status(202).json({ races });
+    response.status(202).json(races);
   } catch (error) {
     response.status(500).json({ error });
   }

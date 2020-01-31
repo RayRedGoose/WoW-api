@@ -94,6 +94,22 @@ app.get('/api/v1/classes', async (request, response) => {
   }
 });
 
+app.get('/api/v1/classes/:id', async (request, response) => {
+  try {
+    const classes = await database('classes').where('id', request.params.id).select();
+    const [ singleClass ] = classes
+    if (!classes.length) {
+      return response.status(404).json({
+        error: `Could not find class with id ${request.params.id}`
+      });
+    }
+    return response.status(200).json(singleClass);
+  }
+  catch(error) {
+    response.status(500).json({ error });
+  }
+});
+
 app.listen(app.get('port'), () => {
   console.log(`Server is running on http://localhost:${app.get('port')}.`);
 });

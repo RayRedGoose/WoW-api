@@ -110,6 +110,16 @@ app.get('/api/v1/classes/:id', async (request, response) => {
   }
 });
 
+app.get('/api/v1/characters', async (request, response) => {
+  try {
+    const characters = await database('characters').select();
+    response.status(200).json(characters);
+  }
+  catch(error) {
+    response.status(500).json({ error });
+  }
+});
+
 app.listen(app.get('port'), () => {
   console.log(`Server is running on http://localhost:${app.get('port')}.`);
 });

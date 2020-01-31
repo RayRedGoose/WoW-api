@@ -68,6 +68,22 @@ function getClasses(raceClasses) {
   return Promise.all(classesPromises);
 }
 
+app.get('/api/v1/faction/:name', async (request, response) => {
+  try {
+    const races = await database('races').where('faction', request.params.name).select();
+    if (races.length) {
+      response.status(200).json(races);
+    } else {
+      response.status(404).json({
+        error: `Could not find any race from ${request.params.name}`
+      });
+    }
+  }
+  catch(error) {
+    response.status(500).json({ error });
+  }
+});
+
 app.listen(app.get('port'), () => {
   console.log(`Server is running on http://localhost:${app.get('port')}.`);
 });

@@ -182,6 +182,41 @@ app.post('/api/v1/characters', async (request, response) => {
     response.status(500).json({ error });
   }
 });
+
+app.post('/api/v1/races', async (request, response) => {
+  const race = request.body;
+  const properties = ['name', 'faction', 'race_symbol', 'race_image', 'description', 'history', 'starting_zone', 'home_city', 'leader', 'mount', 'classes']
+
+  for (let requiredParameter of properties) {
+    if (!race[requiredParameter]) {
+      return response
+        .status(422)
+        .send({ error: `Expected format: {
+          name: <String>,
+          faction: <String>,
+          race_symbol: <String>,
+          race_image: <String>,
+          description: <String>,
+          history: <String>,
+          starting_zone: <String>,
+          home_city: <String>,
+          leader: <String>,
+          mount: <String>,
+          classes: <String>
+        }. You're missing a "${requiredParameter}" property.` });
+    }
+  }
+
+  response.status(201).json({ race })
+
+  try {
+    const id = await database('races').insert(race, 'id');
+    response.status(201).json({ id })
+  } catch (error) {
+    response.status(500).json({ error });
+  }
+});
+
 app.listen(app.get('port'), () => {
   console.log(`Server is running on http://localhost:${app.get('port')}.`);
 });

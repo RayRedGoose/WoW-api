@@ -118,6 +118,7 @@ A character stored on the server has an `id`, `name`, `race_id`, `class_id`, `we
 | ----|------|---------|---------------- |
 | `/api/v1/races/:id` | DELETE | not needed | Array of all remaining races: `[{ id: 122, name: "Vulpera", race_symbol: "vulpera-symbol-image.jpg", faction: "horde", race_image: "vulpera.jpg", description: "Clever and resourceful, the vulpera have survived amidst the harsh desert of Vol'dun for...", history: "The vulpera have lived in Vol'dun as free traders and merchants for countless generations. For much of that time,...", starting_zone: "Vol'dun", home_city: "Vulpera Hideaway", leader: "Kiro", mount: "Caravan Hyena", classes: "[12, 16]"}]` |
 | `/api/v1/races/:id/classes` | DELETE | not needed | Object with result: `{ result: 'Success!' }` |
+| `/api/v1/characters/:id` | DELETE | not needed | Array of all remaining characters: `[{ id: 1890, name: "Raderstan", race: 101, className: 18, weapon: 907 }]` |
 
 Note: All of these endpoints will return semantic errors if something is wrong with the request.
 

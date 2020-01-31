@@ -146,6 +146,22 @@ app.get('/api/v1/weapons', async (request, response) => {
   }
 });
 
+app.get('/api/v1/weapons/:id', async (request, response) => {
+  try {
+    const weapons = await database('weapons').where('id', request.params.id).select();
+    const [ weapon ] = weapons
+    if (!weapons.length) {
+      return response.status(404).json({
+        error: `Could not find class with id ${request.params.id}`
+      });
+    }
+    return response.status(200).json(weapon);
+  }
+  catch(error) {
+    response.status(500).json({ error });
+  }
+});
+
 app.listen(app.get('port'), () => {
   console.log(`Server is running on http://localhost:${app.get('port')}.`);
 });

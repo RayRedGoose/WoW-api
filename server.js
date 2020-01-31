@@ -41,6 +41,33 @@ app.get('/api/v1/races/:id', async (request, response) => {
   }
 });
 
+app.get('/api/v1/races/:id/classes', async (request, response) => {
+  try {
+    const raceClasses = await database('raceClasses').where('race_id', request.params.id).select();
+
+    if (!raceClasses.length) {
+      return response.status(404).json({
+        error: `Could not find any class for this race`
+      });
+    }
+
+    const classes = await getClasses(raceClasses);
+
+    return response.status(200).json(classes);
+  }
+  catch(error) {
+    response.status(500).json({ error });
+  }
+});
+
+function getClasses(raceClasses) {
+  const classesPromises = raceClasses.map(async (el) => {
+    const elems = await database('classes').where('id', el.class_id).select();
+    return elems[0];
+  });
+  return Promise.all(classesPromises);
+}
+
 app.listen(app.get('port'), () => {
   console.log(`Server is running on http://localhost:${app.get('port')}.`);
 });

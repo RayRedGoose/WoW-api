@@ -4,6 +4,10 @@ This app is the back-end server for the Mod 4 FE first solo project.
 
 ## Getting started
 
+### Deploy
+
+This api endpoints is deployed to Heroku and available to access on `https://wow-api-rrgoose.herokuapp.com/`
+
 ### Installation
 
 1. Clone down this repository.
@@ -14,6 +18,10 @@ This app is the back-end server for the Mod 4 FE first solo project.
     - `npm install`
 
 The server will run on `http://localhost:3001`. All endpoints are prefixed with `/api/v1`.
+
+### Usage
+
+1. To fire up the server, run `npm start`.
 
 ### Data Model
 
@@ -76,10 +84,6 @@ A character stored on the server has an `id`, `name`, `race_id`, `class_id`, `we
   updated_at: "2020-01-31T16:43:34.900Z"
 }
 ```
-
-### Usage
-
-1. To fire up the server, run `npm start`.
 
 ### Endpoints
 

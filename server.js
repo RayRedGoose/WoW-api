@@ -84,6 +84,16 @@ app.get('/api/v1/faction/:name', async (request, response) => {
   }
 });
 
+app.get('/api/v1/classes', async (request, response) => {
+  try {
+    const classes = await database('classes').select();
+    response.status(200).json(classes);
+  }
+  catch(error) {
+    response.status(500).json({ error });
+  }
+});
+
 app.listen(app.get('port'), () => {
   console.log(`Server is running on http://localhost:${app.get('port')}.`);
 });

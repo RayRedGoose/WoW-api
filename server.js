@@ -212,6 +212,41 @@ app.post('/api/v1/races', async (request, response) => {
   }
 });
 
+app.post('/api/v1/races/:id/classes', async (request, response) => {
+  const raceID = request.params.id
+
+  const { classes } = request.body
+  try {
+    const addedClasses = await postClasses(raceID, classes);
+
+    response.status(201).json(addedClasses);
+  }
+  catch (error) {
+    response.status(500).json({ error });
+  }
+});
+
+function postClasses(raceID, classes) {
+  const classesPromises = classes.map(async classID => {
+    if (!classID) {
+      return response
+        .status(422)
+        .send({ error: `Expected format: <Number>. You're missing id` });
+    }
+
+    const pair = {
+      race_id: +raceID,
+      class_id: +classID
+    }
+
+    const pair = await database('raceClasses').insert(pair);
+
+    return pair[0];
+  });
+
+  return Promise.all(classesPromises);
+}
+
 app.delete('/api/v1/characters/:id', async (request, response) => {
   try {
     await database('characters').where('id', request.params.id).del();
@@ -227,6 +262,15 @@ app.delete('/api/v1/races/:id', async (request, response) => {
     await database('races').where('id', request.params.id).del();
     const races = await database('races').select();
     response.status(202).json(races);
+  } catch (error) {
+    response.status(500).json({ error });
+  }
+});
+
+app.delete('/api/v1/races/:id/classes', async (request, response) => {
+  try {
+    await database('raceClasses').where('race_id', request.params.id).del();
+    response.status(202).json({result: 'Success!'});
   } catch (error) {
     response.status(500).json({ error });
   }

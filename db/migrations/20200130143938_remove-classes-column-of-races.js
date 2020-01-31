@@ -5,7 +5,7 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-  knex.schema.table('users', function(table) {
+  knex.schema.table('races', function(table) {
     table.string('classes');
   });
 };

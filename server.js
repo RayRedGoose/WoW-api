@@ -162,6 +162,26 @@ app.get('/api/v1/weapons/:id', async (request, response) => {
   }
 });
 
+app.post('/api/v1/characters', async (request, response) => {
+  const character = request.body;
+
+  for (let requiredParameter of ['name', 'race_id', 'class_id', 'weapon_id']) {
+    if (!character[requiredParameter]) {
+      return response
+        .status(422)
+        .send({ error: `Expected format: { name: <String>, race_id: <Number>, class_id: <Number>, weapon_id: <Number> }. You're missing a "${requiredParameter}" property.` });
+    }
+  }
+
+  response.status(201).json({ character })
+
+  try {
+    const id = await database('characters').insert(character, 'id');
+    response.status(201).json({ id })
+  } catch (error) {
+    response.status(500).json({ error });
+  }
+});
 app.listen(app.get('port'), () => {
   console.log(`Server is running on http://localhost:${app.get('port')}.`);
 });

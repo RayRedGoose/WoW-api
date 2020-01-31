@@ -24,6 +24,23 @@ app.get('/api/v1/races', async (request, response) => {
     response.status(500).json({ error });
   }
 });
+
+app.get('/api/v1/races/:id', async (request, response) => {
+  try {
+    const races = await database('races').where('id', request.params.id).select();
+    const [ race ] = races
+    if (!races.length) {
+      return response.status(404).json({
+        error: `Could not find race with id ${request.params.id}`
+      });
+    }
+    return response.status(200).json(race);
+  }
+  catch(error) {
+    response.status(500).json({ error });
+  }
+});
+
 app.listen(app.get('port'), () => {
   console.log(`Server is running on http://localhost:${app.get('port')}.`);
 });

@@ -120,6 +120,22 @@ app.get('/api/v1/characters', async (request, response) => {
   }
 });
 
+app.get('/api/v1/characters/:id', async (request, response) => {
+  try {
+    const characters = await database('characters').where('id', request.params.id).select();
+    const [ character ] = characters
+    if (!characters.length) {
+      return response.status(404).json({
+        error: `Could not find class with id ${request.params.id}`
+      });
+    }
+    return response.status(200).json(character);
+  }
+  catch(error) {
+    response.status(500).json({ error });
+  }
+});
+
 app.listen(app.get('port'), () => {
   console.log(`Server is running on http://localhost:${app.get('port')}.`);
 });

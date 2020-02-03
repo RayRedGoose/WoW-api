@@ -239,9 +239,9 @@ function postClasses(raceID, classes) {
       class_id: +classID
     }
 
-    const pair = await database('raceClasses').insert(pair);
+    const pairReturned = await database('raceClasses').insert(pair);
 
-    return pair[0];
+    return pairReturned[0];
   });
 
   return Promise.all(classesPromises);
